@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - U-A-SHOP</title>
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+  <div class="admin-page">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="logo">🛒 U-A<span>SHOP</span></a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Main</div>
+          <a href="#dashboard" class="nav-item active" data-tab="dashboard">
+            <span>📊</span> Dashboard
+          </a>
+          <a href="#products" class="nav-item" data-tab="products">
+            <span>📦</span> Products
+          </a>
+          <a href="#orders" class="nav-item" data-tab="orders">
+            <span>🛒</span> Orders
+          </a>
+          <a href="#users" class="nav-item" data-tab="users">
+            <span>👥</span> Users
+          </a>
+        </div>
+        
+        <div class="nav-section">
+          <div class="nav-section-title">Settings</div>
+          <a href="index.html" class="nav-item">
+            <span>🏠</span> Back to Store
+          </a>
+          <a href="#" class="nav-item logout-btn">
+            <span>🚪</span> Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="header-search">
+          <span>🔍</span>
+          <input type="text" placeholder="Search...">
+        </div>
+        
+        <div class="header-actions">
+          <button class="notification-btn">
+            <span>🔔</span>
+            <span class="notification-badge">3</span>
+          </button>
+          
+          <div class="user-menu">
+            <div class="user-avatar">A</div>
+            <span>Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="admin-content">
+        <!-- Dashboard Tab -->
+        <div class="tab-content active" id="dashboard">
+          <h1 class="page-title">Dashboard</h1>
+          
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon users">👥</div>
+              <div class="stat-info">
+                <h3 id="totalUsers">0</h3>
+                <p>Total Users</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon products">📦</div>
+              <div class="stat-info">
+                <h3 id="totalProducts">0</h3>
+                <p>Total Products</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon orders">🛒</div>
+              <div class="stat-info">
+                <h3 id="totalOrders">0</h3>
+                <p>Total Orders</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon revenue">💰</div>
+              <div class="stat-info">
+                <h3 id="totalRevenue">$0</h3>
+                <p>Total Revenue</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="data-card">
+            <div class="card-header">
+              <h3>Recent Orders</h3>
+              <a href="#orders" class="btn btn-sm btn-outline" onclick="switchTab('orders')">View All</a>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentOrdersTable">
+                <tr><td colspan="4" style="text-align: center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Products Tab -->
+        <div class="tab-content" id="products">
+          <h1 class="page-title">Products</h1>
+          
+          <div class="data-card">
+            <div class="card-header">
+              <h3>All Products</h3>
+              <button class="btn btn-primary" onclick="openProductModal()">
+                <span>+</span> Add Product
+              </button>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Type</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody">
+                <tr><td colspan="6" style="text-align: center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div class="tab-content" id="orders">
+          <h1 class="page-title">Orders</h1>
+          
+          <div class="data-card">
+            <div class="card-header">
+              <h3>All Orders</h3>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <tr><td colspan="7" style="text-align: center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Users Tab -->
+        <div class="tab-content" id="users">
+          <h1 class="page-title">Users</h1>
+          
+          <div class="data-card">
+            <div class="card-header">
+              <h3>All Users</h3>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Joined</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody">
+                <tr><td colspan="5" style="text-align: center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Product Modal -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add Product</h2>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      
+      <form id="productForm">
+        <div class="modal-body">
+          <div class="type-toggle">
+            <div class="type-option selected" data-type="physical">
+              <span>📦</span>
+              <h4>Physical</h4>
+              <p>Tangible items with shipping</p>
+            </div>
+            <div class="type-option" data-type="digital">
+              <span>💾</span>
+              <h4>Digital</h4>
+              <p>Downloadable files</p>
+            </div>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Product Name *</label>
+              <input type="text" id="productName" class="input" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Category *</label>
+              <select id="productCategory" class="input" required>
+                <option value="">Select Category</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Home">Home & Living</option>
+                <option value="Sports">Sports</option>
+                <option value="Books">Books</option>
+                <option value="Software">Software</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Price *</label>
+              <input type="number" id="productPrice" class="input" step="0.01" min="0" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Discount (%)</label>
+              <input type="number" id="productDiscount" class="input" min="0" max="100" value="0">
+            </div>
+            
+            <div class="form-group" id="stockField">
+              <label>Stock Quantity *</label>
+              <input type="number" id="productStock" class="input" min="0" value="0">
+            </div>
+            
+            <div class="form-group full-width">
+              <label>Description *</label>
+              <textarea id="productDescription" class="input" rows="4" required></textarea>
+            </div>
+            
+            <div class="form-group full-width">
+              <label>Product Images</label>
+              <div class="image-upload" onclick="document.getElementById('productImages').click()">
+                <span>📷</span>
+                <p>Click to upload images</p>
+              </div>
+              <input type="file" id="productImages" multiple accept="image/*" hidden>
+              <div class="image-preview" id="imagePreview"></div>
+            </div>
+            
+            <div class="form-group full-width" id="digitalFileField" style="display: none;">
+              <label>Digital File</label>
+              <input type="file" id="digitalFile" class="input">
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="../js/firebase.js"></script>
+  <script type="module" src="../js/utils.js"></script>
+  <script type="module" src="../js/theme.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+  <script type="module" src="../js/admin.js"></script>
+  
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+    }
+    
+    // Tab navigation
+    document.querySelectorAll('.nav-item[data-tab]').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchTab(item.dataset.tab);
+      });
+    });
+  </script>
+</body>
+</html>
