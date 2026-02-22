@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - U-A-SHOP</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-top">
+      <div class="container">
+        <span>Welcome to U-A-SHOP | Free shipping on orders over $50</span>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="container">
+        <div class="header-content">
+          <a href="index.html" class="logo">🛒 U-A<span>SHOP</span></a>
+          
+          <form class="search-bar" id="searchForm">
+            <input type="text" id="searchInput" placeholder="Search for products...">
+            <button type="submit">🔍</button>
+          </form>
+          
+          <div class="header-actions">
+            <a href="cart.html" class="header-btn">
+              <span class="cart-icon">🛒</span>
+              <span class="cart-count">0</span>
+              <span>Cart</span>
+            </a>
+            <a href="dashboard.html" class="header-btn user-menu" style="display: none;">
+              <span>👤</span>
+              <span class="user-name">User</span>
+            </a>
+            <a href="login.html" class="header-btn auth-btn">
+              <span>🔑</span>
+              <span>Login</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Detail -->
+  <main class="container">
+    <div class="product-detail" id="productDetails">
+      <div class="loading" style="margin: 100px auto;"></div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>About U-A-SHOP</h3>
+          <p>Your one-stop destination for quality products.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="dashboard.html">My Orders</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 U-A-SHOP. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle">🌙</button>
+
+  <!-- Scripts -->
+  <script type="module" src="../js/firebase.js"></script>
+  <script type="module" src="../js/utils.js"></script>
+  <script type="module" src="../js/theme.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+  <script type="module" src="../js/products.js"></script>
+  <script type="module" src="../js/cart.js"></script>
+</body>
+</html>
