@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account - U-A-SHOP</title>
+  <link rel="stylesheet" href="../css/cart.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+  <style>
+    .dashboard {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+      padding: 40px 0;
+    }
+    
+    .sidebar {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 25px;
+      box-shadow: var(--shadow);
+      height: fit-content;
+    }
+    
+    .user-profile {
+      text-align: center;
+      padding-bottom: 25px;
+      border-bottom: 1px solid var(--gray-light);
+      margin-bottom: 25px;
+    }
+    
+    .user-avatar-large {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 auto 15px;
+    }
+    
+    .user-profile h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: var(--dark);
+    }
+    
+    .user-profile p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+    
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 15px;
+      border-radius: var(--radius);
+      color: var(--dark);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .sidebar-link:hover,
+    .sidebar-link.active {
+      background: rgba(245, 114, 36, 0.1);
+      color: var(--primary);
+    }
+    
+    .sidebar-link i {
+      font-size: 18px;
+      width: 24px;
+    }
+    
+    .main-content {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+    
+    .order-card {
+      border: 1px solid var(--gray-light);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: var(--gray-light);
+    }
+    
+    .order-info {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+    }
+    
+    .order-id {
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .order-date {
+      color: var(--gray);
+    }
+    
+    .order-items {
+      padding: 20px;
+    }
+    
+    .order-item-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+    
+    .order-item-row:last-child {
+      border-bottom: none;
+    }
+    
+    .order-item-row img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+    
+    .order-item-info {
+      flex: 1;
+    }
+    
+    .order-item-info h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--dark);
+    }
+    
+    .order-item-info p {
+      font-size: 13px;
+      color: var(--gray);
+    }
+    
+    .download-btn {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+    
+    .pending-download {
+      color: var(--gray);
+      font-size: 12px;
+    }
+    
+    .order-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-top: 1px solid var(--gray-light);
+    }
+    
+    .order-total {
+      display: flex;
+      gap: 10px;
+      font-size: 16px;
+    }
+    
+    .order-total strong {
+      color: var(--primary);
+    }
+    
+    .order-detail-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    
+    .order-detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px;
+      background: var(--gray-light);
+    }
+    
+    .order-detail-header h2 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    
+    .order-detail-header p {
+      color: var(--gray);
+    }
+    
+    .order-detail-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      padding: 25px;
+    }
+    
+    .detail-section {
+      margin-bottom: 30px;
+    }
+    
+    .detail-section h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--gray-light);
+      color: var(--dark);
+    }
+    
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+    
+    .detail-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+    
+    .detail-item-info {
+      flex: 1;
+    }
+    
+    .detail-item-info h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--dark);
+    }
+    
+    .detail-item-info p {
+      color: var(--gray);
+      margin-bottom: 5px;
+    }
+    
+    .download-link {
+      color: var(--success);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    .item-total {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 16px;
+    }
+    
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: var(--gray);
+    }
+    
+    .summary-line.total {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      padding-top: 12px;
+      border-top: 2px solid var(--gray-light);
+      margin-top: 12px;
+    }
+    
+    @media (max-width: 968px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        display: none;
+      }
+      
+      .order-detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-top">
+      <div class="container">
+        <span>Welcome to U-A-SHOP | Free shipping on orders over $50</span>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="container">
+        <div class="header-content">
+          <a href="index.html" class="logo">🛒 U-A<span>SHOP</span></a>
+          
+          <div class="header-actions">
+            <a href="cart.html" class="header-btn">
+              <span class="cart-icon">🛒</span>
+              <span class="cart-count">0</span>
+              <span>Cart</span>
+            </a>
+            <a href="dashboard.html" class="header-btn user-menu" style="display: none;">
+              <span>👤</span>
+              <span class="user-name">User</span>
+            </a>
+            <a href="login.html" class="header-btn auth-btn">
+              <span>🔑</span>
+              <span>Login</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard -->
+  <main class="container">
+    <div class="dashboard">
+      <aside class="sidebar">
+        <div class="user-profile">
+          <div class="user-avatar-large" id="userAvatar">U</div>
+          <h3 id="userName">User</h3>
+          <p id="userEmail">user@example.com</p>
+        </div>
+        
+        <nav class="sidebar-nav">
+          <a href="dashboard.html" class="sidebar-link active">
+            <span>📦</span> My Orders
+          </a>
+          <a href="cart.html" class="sidebar-link">
+            <span>🛒</span> My Cart
+          </a>
+          <a href="#" class="sidebar-link logout-btn">
+            <span>🚪</span> Logout
+          </a>
+        </nav>
+      </aside>
+      
+      <div class="main-content" id="mainContent">
+        <h2 style="margin-bottom: 25px;">My Orders</h2>
+        <div id="ordersList">
+          <div class="loading" style="margin: 40px auto;"></div>
+        </div>
+        <div id="orderDetails" style="display: none;"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>About U-A-SHOP</h3>
+          <p>Your one-stop destination for quality products.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="dashboard.html">My Orders</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 U-A-SHOP. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle">🌙</button>
+
+  <!-- Scripts -->
+  <script type="module" src="../js/firebase.js"></script>
+  <script type="module" src="../js/utils.js"></script>
+  <script type="module" src="../js/theme.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+  <script type="module" src="../js/cart.js"></script>
+  <script type="module" src="../js/orders.js"></script>
+  
+  <script type="module">
+    import { getCurrentUser, requireAuth } from '../js/auth.js';
+    
+    // Check auth
+    if (!getCurrentUser()) {
+      window.location.href = 'login.html';
+    }
+    
+    // Load user info
+    const user = getCurrentUser();
+    if (user) {
+      document.getElementById('userName').textContent = user.name;
+      document.getElementById('userEmail').textContent = user.email;
+      document.getElementById('userAvatar').textContent = user.name.charAt(0).toUpperCase();
+    }
+    
+    // Check for order ID in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('order');
+    if (orderId) {
+      document.getElementById('ordersList').style.display = 'none';
+      document.getElementById('orderDetails').style.display = 'block';
+      document.querySelector('h2').textContent = 'Order Details';
+    }
+  </script>
+</body>
+</html>
